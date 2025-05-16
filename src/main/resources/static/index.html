@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Messaggio Spring</title>
+</head>
+<body>
+    <h1>Messaggio dal backend:</h1>
+    <p id="messaggio">Caricamento...</p>
+
+    <script>
+        fetch('http://localhost:8080/api/message')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Errore');
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('messaggio').innerText = data.text;
+            })
+            .catch(error => {
+                document.getElementById('messaggio').innerText = 'Errore: ' + error;
+            });
+    </script>
+</body>
+</html>
