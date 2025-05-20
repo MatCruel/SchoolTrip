@@ -1,27 +1,36 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Messaggio Spring</title>
+  <title>Invia un messaggio</title>
 </head>
 <body>
-    <h1>Messaggio dal backend:</h1>
-    <p id="messaggio">Caricamento...</p>
+  <h2>Invia un messaggio</h2>
 
-    <script>
-        fetch('http://localhost:8080/api/message')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Errore');
-                }
-                return response.json();
-            })
-            .then(data => {
-                document.getElementById('messaggio').innerText = data.text;
-            })
-            .catch(error => {
-                document.getElementById('messaggio').innerText = 'Errore: ' + error;
-            });
-    </script>
+  <input type="text" id="nome" placeholder="Il tuo nome">
+  <input type="text" id="messaggio" placeholder="Scrivi un messaggio">
+  <button onclick="invia()">Invia</button>
+
+  <p id="risposta"></p>
+
+  <script>
+    function invia() {
+      const data = {
+        text1: document.getElementById("nome").value,
+        text2: document.getElementById("messaggio").value
+      };
+
+      fetch("http://localhost:8080/api/getlongmessage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.text())
+      .then(res => {
+        document.getElementById("risposta").innerText = res;
+      });
+    }
+  </script>
 </body>
 </html>

@@ -11,7 +11,7 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @RequestMapping("/api/message")
+   /* @RequestMapping("/api/message")
     public Message getMessage() {
         return messageService.getHelloMessage();
     }
@@ -19,6 +19,18 @@ public class MessageController {
     @RequestMapping("/api/m2")
     public String getMessage2() {
         return "hello";
+    }*/
+    
+    @PostMapping("/api/getmessage")
+    public String receiveMessage(@RequestBody String message) {
+        System.out.println("Ricevuto: " + message);
+        return "Hai scritto: " + message;
+    }
+    
+    @PostMapping("/api/getlongmessage")
+    public String receiveLongMessage(@RequestBody Message message) {
+        System.out.println("Ricevuto: " + message);
+        return "Hai scritto: " + message;
     }
 
 }
