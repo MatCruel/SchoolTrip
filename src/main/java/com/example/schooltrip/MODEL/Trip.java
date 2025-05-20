@@ -1,6 +1,7 @@
 package com.example.schooltrip.MODEL;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -15,7 +16,7 @@ public class Trip {
 	private String date;
 	private int cost;
 	
-	@ManyToMany
+	@ManyToMany//(fetch = FetchType.EAGER)//valutare se serve
     @JoinTable(
         name = "trip-->teachers",
         joinColumns = @JoinColumn(name = "trip_id"),
@@ -23,7 +24,7 @@ public class Trip {
     )
     private List<Person> insegnanti;
 
-    @ManyToMany
+    @ManyToMany//(fetch = FetchType.EAGER)//valutare se serve
     @JoinTable(
         name = "trip-->partecipants",
         joinColumns = @JoinColumn(name = "trip_id"),
@@ -112,9 +113,9 @@ public class Trip {
 	}
 
 	@Override
+	//@Transactional //valutare se serve
 	public String toString() {
 		return "Trip [tID=" + tID + ", name=" + name + ", description=" + description + ", location=" + location
-				+ ", date=" + date + ", cost=" + cost + ", insegnanti=" + insegnanti + ", partecipanti=" + partecipanti
-				+ "]";
+				+ ", date=" + date + ", cost=" + cost + ", insegnanti  ..., partecipanti  ..." + "]";
 	}
 }

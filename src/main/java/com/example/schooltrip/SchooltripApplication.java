@@ -49,6 +49,8 @@ public class SchooltripApplication {
 			tripRepo.save(tr);
 		
 			System.out.println("Inserito: " + p);
+			System.out.println("Cerca persona con pID = 3 " + personRepo.findBypID(3));
+			System.out.println("Cerca trip con nome = name " + tripRepo.findByName("name"));
 		};
 	}
 
