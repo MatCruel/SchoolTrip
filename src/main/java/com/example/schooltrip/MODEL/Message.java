@@ -1,4 +1,4 @@
-package com.MODEL;
+package com.example.schooltrip.MODEL;
 
 public class Message {
     private String text1;

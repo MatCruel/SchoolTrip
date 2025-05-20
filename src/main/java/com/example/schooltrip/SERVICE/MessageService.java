@@ -1,7 +1,8 @@
-package com.SERVICE;
+package com.example.schooltrip.SERVICE;
 
-import com.MODEL.Message;
 import org.springframework.stereotype.Service;
+
+import com.example.schooltrip.MODEL.Message;
 
 @Service
 public class MessageService {

@@ -1,7 +1,8 @@
-package com.CONTROLLER;
+package com.example.schooltrip.CONTROLLER;
 
-import com.MODEL.Message;
-import com.SERVICE.MessageService;
+import com.example.schooltrip.MODEL.Message;
+import com.example.schooltrip.SERVICE.MessageService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -66,12 +66,12 @@
 		</dependency>
 		
 		
-		<!-- CANCELLARE POI QUESTA PARTE!!!! -->
+		<!-- CANCELLARE POI QUESTA PARTE!!!! 
 							<dependency>
 					    <groupId>com.h2database</groupId>
 					    <artifactId>h2</artifactId>
 					    <scope>runtime</scope>
-					</dependency>
+					</dependency>-->
 		
 	</dependencies>
 	
