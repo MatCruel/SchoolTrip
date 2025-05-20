@@ -17,7 +17,7 @@ public class Trip {
 	
 	@ManyToMany
     @JoinTable(
-        name = "trip_insegnanti",
+        name = "trip-->teachers",
         joinColumns = @JoinColumn(name = "trip_id"),
         inverseJoinColumns = @JoinColumn(name = "person_id")
     )
@@ -25,7 +25,7 @@ public class Trip {
 
     @ManyToMany
     @JoinTable(
-        name = "trip_partecipanti",
+        name = "trip-->partecipants",
         joinColumns = @JoinColumn(name = "trip_id"),
         inverseJoinColumns = @JoinColumn(name = "person_id")
     )
@@ -111,9 +111,10 @@ public class Trip {
 		this.partecipanti = partecipanti;
 	}
 
-	
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Trip [tID=" + tID + ", name=" + name + ", description=" + description + ", location=" + location
+				+ ", date=" + date + ", cost=" + cost + ", insegnanti=" + insegnanti + ", partecipanti=" + partecipanti
+				+ "]";
+	}
 }

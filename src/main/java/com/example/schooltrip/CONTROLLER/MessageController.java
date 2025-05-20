@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin(origins = "*")
 public class MessageController {
-    @Autowired
-    private MessageService messageService;
+   @Autowired
+   private MessageService messageService;
 
    /* @RequestMapping("/api/message")
     public Message getMessage() {
@@ -33,5 +33,13 @@ public class MessageController {
         System.out.println("Ricevuto: " + message);
         return "Hai scritto: " + message;
     }
+
+	public MessageService getMessageService() {
+		return messageService;
+	}
+
+	public void setMessageService(MessageService messageService) {
+		this.messageService = messageService;
+	}
 
 }

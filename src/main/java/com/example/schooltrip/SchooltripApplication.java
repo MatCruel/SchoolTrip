@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
 
 import com.example.schooltrip.MODEL.Person;
 import com.example.schooltrip.MODEL.Role;
@@ -13,9 +13,9 @@ import com.example.schooltrip.REPOSITORY.TripRepository;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-//@SpringBootApplication(scanBasePackages = {"com.CONTROLLER", "com.SERVICE", "com.MODEL", "com.REPOSITORY"})
+
+@SpringBootApplication()
 //@EnableJpaRepositories("com.REPOSITORY")
 
 //@EnableJpaRepositories(basePackages = "com.REPOSITORY")
@@ -29,11 +29,23 @@ public class SchooltripApplication {
 	@Bean
 	public CommandLineRunner demo(PersonRepository personRepo, TripRepository tripRepo) {
 		return (args) -> {
-			Person p = new Person(1, "vero", "Verdi", "mrossi", "1234", Role.ADMIN);
-			Person x = new Person(3, "vero", "Verdi", "mrossi", "1234", Role.STUDENT);
+			Person p = new Person(6, "vero", "Verdi", "mrossi", "1234", Role.ADMIN);
+			Person x = new Person(7, "vero", "Verdi", "mrossi", "1234", Role.STUDENT);
 			personRepo.save(p);
 			personRepo.save(x);
-			Trip tr = new Trip(1,"name","descr", "posto", "data",50,new ArrayList<Person>(),new ArrayList<Person>());
+			
+			ArrayList<Person> teacher = new ArrayList<Person>();
+			ArrayList<Person> student = new ArrayList<Person>();
+			
+			teacher.add(new Person(1, "vero", "Verdi", "mrossi", "1234", Role.TEACHER));
+			teacher.add(new Person(2, "vero", "Verdi", "mrossi", "1234", Role.TEACHER));
+			teacher.add(new Person(3, "vero", "Verdi", "mrossi", "1234", Role.TEACHER));
+			
+			student.add(new Person(4, "vero", "Verdi", "mrossi", "1234", Role.STUDENT));
+			student.add(new Person(5, "vero", "Verdi", "mrossi", "1234", Role.STUDENT));
+			student.add(new Person(6, "vero", "Verdi", "mrossi", "1234", Role.STUDENT));
+			
+			Trip tr = new Trip(1,"name","descr", "posto", "data",50,teacher,student);
 			tripRepo.save(tr);
 		
 			System.out.println("Inserito: " + p);
