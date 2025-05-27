@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School Trip | Teacher Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://kit.fontawesome.com/c205f9623a.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <header id="top_bar" class="top-bar">
+    <div class="header-content">
+      <a href="#" class="header-logo">
+        <img src="logo-russell.png" alt="Logo" height="50" />
+      </a>
+      <nav class="header-nav">
+        <a href="#" onclick="goToCreateTrip()"><i class="fa-solid fa-plus"></i> Create Trip</a>
+        <a href="#" onclick="goToManageTrips()"><i class="fa-solid fa-list"></i> Manage Trips</a>
+        <a href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="scroll-container-horizontal">
+    <div class="inner-scroll-horizontal" id="teacherScrollWrapper">
+
+      <!-- CREATE TRIP -->
+      <section class="teacher-section" id="createTripSection">
+        <div class="trip-page">
+          <h1>Welcome, Teacher!</h1>
+          <div class="teacher-dashboard">
+            <div class="trip-form-wrapper">
+        <h2><i class="fa-solid fa-plus"></i> Create New Trip</h2>
+        <form class="trip-form-grid">
+          <!-- Left column -->
+          <div class="form-group image-upload">
+            <input type="file" id="image" accept="image/*" hidden onchange="previewImage(event)">
+            <label for="image" class="image-box">
+              <i class="fa-solid fa-plus"></i>
+              <img id="imagePreview" src="#" alt="Preview" style="display: none;">
+            </label>
+          </div>
+        
+          <!-- Right column -->
+          <div class="form-group">
+            <label for="tripName">Trip Name</label>
+            <input type="text" id="tripName" placeholder="e.g. Amalfi Coast Retreat" required />
+          </div>
+
+          <div class="form-group">
+            <label for="destination">Destination</label>
+            <input type="text" id="destination" placeholder="e.g. Amalfi, Italy" required />
+          </div>
+
+          <div class="form-group">
+            <label for="startDate">Start Date</label>
+            <input type="date" id="startDate" required />
+          </div>
+        
+          <div class="form-group">
+            <label for="endDate">End Date</label>
+            <input type="date" id="endDate" required />
+          </div>
+        
+          <div class="form-group">
+            <label for="maxStudents">Max Students</label>
+            <input type="number" id="maxStudents" placeholder="e.g. 30" required />
+          </div>
+        
+          <div class="form-group">
+            <label for="cost">Cost (€)</label>
+            <input type="number" id="cost" placeholder="e.g. 150" min="0" required />
+          </div>
+        
+          <div class="form-group full-width">
+            <label for="description">Trip Description</label>
+            <textarea id="description" rows="4" placeholder="Write a summary of the trip..." required></textarea>
+          </div>
+        
+          <div class="form-actions full-width">
+            <button type="submit" class="btn create-btn">
+              <i class="fa-solid fa-paper-plane"></i> Create Trip
+            </button>
+          </div>
+        </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+
+      <!-- MANAGE TRIPS -->
+      <section class="teacher-section" id="manageTripsSection">
+        <div class="trip-page">
+          <h1>Your Trips</h1>
+          <div class="manage-trips-container">
+            <div class="trip-card manage">
+              <img src="amalfi.jpg" alt="Amalfi Trip" class="trip-image">
+              <div class="trip-info">
+                <h2>Amalfi Coast Retreat</h2>
+                <p><i class="fa-solid fa-location-dot"></i> Amalfi Coast, Italy</p>
+                <p><i class="fa-solid fa-calendar-days"></i> May 25–27, 2025</p>
+                <p><i class="fa-solid fa-users"></i> 23/25 Students</p>
+                <p><i class="fa-solid fa-euro-sign"></i> 150€</p>
+          
+                <div class="trip-actions">
+                  <button class="btn small-btn"><i class="fa-solid fa-pen"></i> Edit</button>
+                  <button class="btn small-btn red"><i class="fa-solid fa-trash"></i> Delete</button>
+                  <button class="btn small-btn"><i class="fa-solid fa-users"></i> Participants</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="trip-card manage">
+              <img src="dolomites.jpg" alt="Dolomites Trip" class="trip-image">
+              <div class="trip-info">
+                <h2>Dolomites Nature Hike</h2>
+                <p><i class="fa-solid fa-location-dot"></i> Trentino-Alto Adige</p>
+                <p><i class="fa-solid fa-calendar-days"></i> June 15–18, 2025</p>
+                <p><i class="fa-solid fa-users"></i> 18/20 Students</p>
+                <p><i class="fa-solid fa-euro-sign"></i> 200€</p>
+            
+                <div class="trip-actions">
+                  <button class="btn small-btn"><i class="fa-solid fa-pen"></i> Edit</button>
+                  <button class="btn small-btn red"><i class="fa-solid fa-trash"></i> Delete</button>
+                  <button class="btn small-btn"><i class="fa-solid fa-users"></i> Participants</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="trip-card manage">
+              <img src="florence.jpg" alt="Florence Trip" class="trip-image">
+              <div class="trip-info">
+                <h2>Florence Art Tour</h2>
+                <p><i class="fa-solid fa-location-dot"></i> Florence, Italy</p>
+                <p><i class="fa-solid fa-calendar-days"></i> March 14–15, 2025</p>
+                <p><i class="fa-solid fa-users"></i> 25/25 Students</p>
+                <p><i class="fa-solid fa-euro-sign"></i> 120€</p>
+            
+                <div class="trip-actions">
+                  <button class="btn small-btn"><i class="fa-solid fa-pen"></i> Edit</button>
+                  <button class="btn small-btn red"><i class="fa-solid fa-trash"></i> Delete</button>
+                  <button class="btn small-btn"><i class="fa-solid fa-users"></i> Participants</button>
+                </div>
+              </div>
+            </div>
+          
+            <!-- You can duplicate this card for more trips -->
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+</body>
+
+</html>
+
+<script>
+  function previewImage(event) {
+    const preview = document.getElementById('imagePreview');
+    preview.src = URL.createObjectURL(event.target.files[0]);
+    preview.style.display = 'block';
+  }
+
+  const scrollWrapper = document.getElementById('teacherScrollWrapper');
+
+  function goToCreateTrip() {
+  scrollWrapper.style.transform = 'translateX(0)';
+  }
+
+  function goToManageTrips() {
+  scrollWrapper.style.transform = 'translateX(-100vw)';
+  }
+</script>

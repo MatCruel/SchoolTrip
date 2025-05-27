@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "person")
 public class Person {
 	@Id
-	private Integer pID;
+	private int pID;
 	private String name;
 	private String surname;
 	private String username;

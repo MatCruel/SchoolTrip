@@ -1,0 +1,740 @@
+/* filepath: c:\Users\Matteo\Desktop\Progetto Informatica\style.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display : flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('subtle-prism.png') no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin: 0; /* Remove default margin */
+  padding-top: 60px; /* Add padding equal to the height of the top bar */
+}
+
+.wrapper {
+  width: 420px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .2);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: white;
+  border-radius: 10px;
+  padding: 30px 40px;
+}
+
+.wrapper h1 {
+  font-size: 36px;
+  text-align: center;
+}
+
+.wrapper .input_box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+
+  margin: 30px 0;
+}
+
+.input_box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, .2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: white;
+  padding: 20px 45px 20px 20px;
+}
+
+.input_box input::placeholder {
+  color: #fff;
+
+}
+
+.input_box i {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.wrapper .remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14.5px;
+  margin: -15px 0 15px;
+}
+
+.remember-forgot label input {
+  accent-color: #fff;
+  margin-right: 3px;
+}
+
+.remember-forgot a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.remember-forgot a:hover {
+  text-decoration: underline;
+}
+
+.wrapper .btn {
+  width: 100%;
+  height: 45px;
+  background: white;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.wrapper .btn:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px); /* Slight upward movement */
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.wrapper .register-link {
+  font-size: 14.5px;
+  text-align: center;
+  margin: 20px 0 15px;
+}
+
+.register-link p a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link p a:hover {
+  text-decoration: underline;
+}
+
+/* Error message styling */
+.error-message {
+  color: rgba(255, 0, 0, 1);
+  font-size: 14px;
+  margin-top: 5px;
+  display: none; /* Hidden by default */
+}
+
+/* Red border for invalid input */
+.input_box input.error {
+  border: 2px solid rgba(255, 0, 0, 0.5);
+}
+
+/* Role selection styling */
+.role-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.role-options {
+  display: flex;
+  justify-content: flex-start; /* Align items to the left */
+  gap: 40px; /* Space between Student and Teacher options */
+  align-items: center; /* Vertically align radio buttons and labels */
+}
+
+.role-options input[type="radio"] {
+  appearance: none; /* Remove default browser styling */
+  width: 14px; /* Set the size of the radio button */
+  height: 14px; /* Ensure width and height are equal */
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Custom border */
+  border-radius: 50%; /* Make it perfectly circular */
+  background-color: transparent; /* Transparent background */
+  cursor: pointer;
+  position: relative;
+}
+
+.role-options input[type="radio"]:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Optional hover effect */
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.role-options input[type="radio"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px; /* Inner circle size */
+  height: 6px;
+  background-color: white; /* Inner circle color */
+  border-radius: 50%;
+}
+
+#top_bar {
+  position: fixed; /* Fix the top bar at the top of the page */
+  top: 0; /* Align it to the top */
+  left: 0; /* Align it to the left */
+  width: 100%; /* Make it span the full width of the page */
+  background-color: transparent;
+  backdrop-filter: blur(30px); /* Background color */
+  text-align: center;
+  border-bottom: 2px solid rgba(255, 255, 255, .2);
+  padding: 10px 20px;
+  z-index: 1000; /* Ensure it stays above other elements */
+}
+
+.header-content {
+  display: flex; /* Enable Flexbox */
+  align-items: center; /* Vertically align items */
+  justify-content: space-between; /* Space out elements if needed */
+}
+
+.header-logo {
+  border: none;
+  background-color: transparent;
+  height: 50px; /* Adjust the height of the logo */
+  margin-right: 20px; /* Add spacing between the logo and the navigation */
+}
+
+.header-nav {
+  display: flex; /* Enable Flexbox for navigation links */
+  gap: 15px; /* Add spacing between the links */
+  margin-left: 20px; /* Add spacing between the logo and the links */
+}
+
+.header-nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: transform 0.15s ease-out, text-shadow 0.15s ease-out;
+}
+
+.header-nav a:hover {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px); /* Slight upward movement */
+  transition: transform 0.15s ease-out, text-shadow 0.15s ease-out;
+}
+
+.trip-list {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 40px; /* More breathing room around the cards */
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.trip-list::-webkit-scrollbar {
+  height: 8px;
+}
+
+.trip-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+.trip-card {
+  flex: 0 0 auto;
+  width: 300px;
+  scroll-snap-align: center; /* Instead of start */
+  margin-right: 10px;
+}
+
+.trip-card {
+  flex: 0 0 auto;
+  width: 350px; /* Increase the width of the card */
+  height: 570px; /* Increase the height of the card */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  scroll-snap-align: center;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  border-radius: 15px;
+  overflow: hidden;
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.trip-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.trip-image {
+  width: 100%;
+  height: 160px; /* Increase the height of the image */
+  object-fit: cover;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+.trip-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensure consistent height for the container */
+}
+
+.trip-info h2 {
+  margin-bottom: 10px; /* Add consistent spacing below the title */
+  font-size: 24px;
+  line-height: 1.2; /* Ensure proper line spacing for multi-line titles */
+  margin-top: 5px;
+}
+
+.trip-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* Reduce spacing between info lines */
+  margin-top: auto; /* Push the trip details and button to the bottom */
+  margin-bottom: 90px;
+}
+
+.learn-more-btn {
+  margin-top: 10px; /* Add spacing above the button */
+  width: 100%;
+  background-color: white;
+  color: #333;
+  border: none;
+  padding: 12px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease-out;
+}
+
+.trip-info p {
+  margin: 2px 0; /* Less vertical spacing */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.learn-more-btn:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-1px);
+}
+
+.trip-description {
+  font-style: italic;
+  opacity: 0.9;
+  margin-bottom: 10px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 15, 15, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 600px;
+  width: 90%;
+  color: white;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 5px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  z-index: 2;
+}
+
+.close-button:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.modal-details p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+.modal-sign-up {
+  margin-top: 20px;
+  width: 100%;
+  background-color: white;
+  color: #333;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.trip-page {
+  max-width: 1200px;
+  margin: 80px auto 40px;
+  padding: 0 40px;
+  color: white;
+}
+
+.trip-page h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.trip-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.teacher-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.trip-form-wrapper {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 30px 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.trip-form-wrapper h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trip-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 10px 15px;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.form-group.double {
+  display: flex;
+  gap: 20px;
+}
+
+.form-group.double > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.create-btn {
+  background: linear-gradient(145deg, white, #f3f3f3);
+
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 30px;
+  padding: 12px 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.create-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Make calendar icon white in Chromium browsers (figata) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+input[type="file"] {
+  color: white;
+  font-size: 14px;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.trip-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+input[type="file"] {
+  color: white;
+}
+
+.full-width {
+  grid-column: 1 / 3;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.trip-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 20px 40px;
+  align-items: start;
+}
+
+/* Image box spans 2 rows */
+.image-upload {
+  grid-row: span 2;
+}
+
+.image-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 30px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 12px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.full-width {
+  grid-column: 1 / 3;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.manage-trips-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.trip-card.manage {
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
+.trip-card.manage .trip-image {
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+  object-position: center;
+  border-right: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+}
+
+.trip-card.manage .trip-info {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.trip-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.small-btn {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 10px 16px;
+  font-size: 14px;
+  border-radius: 30px;
+  background-color: white;
+  color: #333;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease-out;
+}
+
+.small-btn:hover {
+  transform: translateY(-1px);
+}
+
+.small-btn.red {
+  background-color: #ff2c2c;
+  color: white;
+}
+
+.scroll-container-horizontal {
+  overflow: hidden;
+  width: 100vw;
+  height: 100%;
+  position: relative;
+}
+
+.inner-scroll-horizontal {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+  width: 200vw; /* two panels wide */
+}
+
+.teacher-section {
+  width: 100vw;
+  height: auto;
+  padding: 40px;
+  box-sizing: border-box;
+}

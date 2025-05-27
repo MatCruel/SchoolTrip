@@ -12,4 +12,5 @@ public interface TripRepository extends JpaRepository<Trip, Integer> {
 
 	List<Trip> findByName(String s);
     // puoi anche aggiungere metodi custom come: findByUsername(String username);
+	
 }

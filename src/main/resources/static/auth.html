@@ -1,0 +1,131 @@
+<!-- auth.html -->
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+  <meta charset="UTF-8">
+  <script src="https://kit.fontawesome.com/c205f9623a.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Lato&family=Playfair+Display&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Trip | Authentication</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .scroll-container {
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .inner-scroll {
+      transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+      height: 200vh; /* Two full views stacked */
+    }
+
+    .section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+    <header id="top_bar" class="top-bar">
+        <div class="header-content">
+          <a href="https://www.liceorussell.eu" class="header-logo" target="_blank" rel="noopener noreferrer">
+            <img src="logo-russell.png" alt="Logo" height="50" />
+          </a>
+          <nav class="header-nav">
+            <a href="auth.html"><i class="fa-solid fa-home"></i> Home</a>
+            <a href="create-trip.html"><i class="fa-solid fa-plus"></i> Create Trip</a>
+            <a href="manage-trips.html"><i class="fa-solid fa-list"></i> Manage Trips</a>
+          </nav>
+        </div>
+      </header>
+
+  <div class="scroll-container">
+    <div class="inner-scroll" id="scrollWrapper">
+      <div class="section" id="loginSection">
+        <div class="wrapper">
+            <form method="POST" action="/login" id="loginForm">
+                <h1>Login</h1>
+                <div class="input_box">
+                  <input type="text" placeholder="Username" required>
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                
+                <div class="input_box">
+                  <input type="password" placeholder="Password" required>
+                  <i class="fa-solid fa-lock"></i>
+                </div>
+          
+                <div class="remember-forgot">
+                  <label><input type="checkbox"> Remember me</label>
+                  <a href="#">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="btn">Login</button>
+            <div class="register-link">
+              <p>Don't have an account? <a href="#" id="goToRegister">Register</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="section" id="registerSection">
+        <div class="wrapper">
+            <form method="POST" action="/register" id="registerForm">
+                <h1>Register</h1>
+                <div class="input_box">
+                  <input type="text" id="username" placeholder="Username" required>
+                  <i class="fa-solid fa-user"></i>
+                  <span class="error-message" id="usernameError"></span> <!-- Error message for username -->
+                </div>
+                
+                <div class="input_box">
+                  <input type="password" id="password" placeholder="Password" required>
+                  <i class="fa-solid fa-lock"></i>
+                </div>
+              
+                <div class="input_box">
+                  <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                  <i class="fa-solid fa-lock"></i>
+                  <span class="error-message" id="passwordConfirmationError"></span>
+                </div>
+            
+                <div class="role-selection">
+                  <label>Select Role:</label>
+                  <div class="role-options">
+                    <input type="radio" id="student" name="role" value="student" required>
+                    <label for="student">Student</label>
+                    <input type="radio" id="teacher" name="role" value="teacher" required>
+                    <label for="teacher">Teacher</label>
+                  </div>
+                  <span class="error-message" id="roleError"></span> <!-- Error message for role -->
+                </div>
+               
+                <button type="submit" class="btn">Register</button>
+            <div class="register-link">
+              <p>Already have an account? <a href="#" id="goToLogin">Login</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('goToRegister')?.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.getElementById('scrollWrapper').style.transform = 'translateY(-100vh)';
+    });
+
+    document.getElementById('goToLogin')?.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.getElementById('scrollWrapper').style.transform = 'translateY(0)';
+    });
+  </script>
+</body>
+</html>

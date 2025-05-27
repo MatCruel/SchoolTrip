@@ -29,23 +29,23 @@ public class SchooltripApplication {
 	@Bean
 	public CommandLineRunner demo(PersonRepository personRepo, TripRepository tripRepo) {
 		return (args) -> {
-			Person p = new Person(6, "vero", "Verdi", "mrossi", "1234", Role.ADMIN);
-			Person x = new Person(7, "vero", "Verdi", "mrossi", "1234", Role.STUDENT);
+			Person p = new Person(6, "vero", "Verdi", "mrossi6", "1234", Role.ADMIN);
+			Person x = new Person(7, "vero", "Verdi", "mrossi7", "1234", Role.STUDENT);
 			personRepo.save(p);
 			personRepo.save(x);
 			
 			ArrayList<Person> teacher = new ArrayList<Person>();
 			ArrayList<Person> student = new ArrayList<Person>();
 			
-			teacher.add(new Person(1, "vero", "Verdi", "mrossi", "1234", Role.TEACHER));
-			teacher.add(new Person(2, "vero", "Verdi", "mrossi", "1234", Role.TEACHER));
-			teacher.add(new Person(3, "vero", "Verdi", "mrossi", "1234", Role.TEACHER));
+			teacher.add(new Person(1, "vero", "Verdi", "mrossi1", "1234", Role.TEACHER));
+			teacher.add(new Person(2, "vero", "Verdi", "mrossi2", "1234", Role.TEACHER));
+			teacher.add(new Person(3, "vero", "Verdi", "mrossi3", "1234", Role.TEACHER));
 			
-			student.add(new Person(4, "vero", "Verdi", "mrossi", "1234", Role.STUDENT));
-			student.add(new Person(5, "vero", "Verdi", "mrossi", "1234", Role.STUDENT));
-			student.add(new Person(6, "vero", "Verdi", "mrossi", "1234", Role.STUDENT));
+			student.add(new Person(4, "vero", "Verdi", "mrossi4", "1234", Role.STUDENT));
+			student.add(new Person(5, "vero", "Verdi", "mrossi5", "1234", Role.STUDENT));
+			student.add(new Person(6, "vero", "Verdi", "mrossi6", "1234", Role.STUDENT));
 			
-			Trip tr = new Trip(1,"name","descr", "posto", "data",50,teacher,student);
+			Trip tr = new Trip(3,"name","descr", "posto", "data",500,200,teacher,student);
 			tripRepo.save(tr);
 		
 			System.out.println("Inserito: " + p);

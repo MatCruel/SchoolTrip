@@ -1,6 +1,5 @@
 package com.example.schooltrip.MODEL;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -15,6 +14,7 @@ public class Trip {
 	private String location;
 	private String date;
 	private int cost;
+	private int max_partecipant;
 	
 	@ManyToMany//(fetch = FetchType.EAGER)//valutare se serve
     @JoinTable(
@@ -35,8 +35,9 @@ public class Trip {
 	
 	public Trip() {}
 
-	public Trip(int tID, String name, String description, String location, String date, int cost,
-			ArrayList<Person> insegnanti, ArrayList<Person> partecipanti) {
+
+	public Trip(int tID, String name, String description, String location, String date, int cost, int max_partecipant,
+			List<Person> insegnanti, List<Person> partecipanti) {
 		super();
 		this.tID = tID;
 		this.name = name;
@@ -44,6 +45,7 @@ public class Trip {
 		this.location = location;
 		this.date = date;
 		this.cost = cost;
+		this.max_partecipant = max_partecipant;
 		this.insegnanti = insegnanti;
 		this.partecipanti = partecipanti;
 	}
@@ -111,6 +113,15 @@ public class Trip {
 	public void setPartecipanti(List<Person> partecipanti) {
 		this.partecipanti = partecipanti;
 	}
+
+	public int getMax_partecipant() {
+		return max_partecipant;
+	}
+
+	public void setMax_partecipant(int max_partecipant) {
+		this.max_partecipant = max_partecipant;
+	}
+
 
 	@Override
 	//@Transactional //valutare se serve

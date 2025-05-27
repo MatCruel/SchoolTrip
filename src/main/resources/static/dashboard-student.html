@@ -1,0 +1,247 @@
+<!-- dashboard-student.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>School Trip | Student Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/c205f9623a.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <header id="top_bar" class="top-bar">
+      <div class="header-content">
+        <a href="#" class="header-logo">
+          <img src="logo-russell.png" alt="Logo" height="50" />
+        </a>
+        <nav class="header-nav">
+          <a href="#"><i class="fa-solid fa-calendar-days"></i> My Trips</a>
+          <a href="#"><i class="fa-solid fa-euro-sign"></i> Payments</a>
+          <a href="#"><i class="fa-solid fa-star"></i> Reviews</a>
+          <a href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="trip-page">
+      <h1>Welcome, Student!</h1>
+      <div class="trip-scroll-container">
+        <div class="trip-list">
+          <div class="trip-card">
+            <img src="rome.jpg" alt="Rome Trip" class="trip-image">
+            <div class="trip-info">
+              <h2>Rome Cultural Tour</h2>
+              
+              <div class="trip-meta">
+                <p><i class="fa-solid fa-location-dot"></i> Rome, Italy</p>
+                <p><i class="fa-solid fa-calendar-days"></i> March 20–23, 2025</p>
+                <p><i class="fa-solid fa-user-tie"></i> Mr. Rossi</p>
+                <p><i class="fa-solid fa-euro-sign"></i> €150</p>
+              </div>
+            
+              <button class="btn learn-more-btn" onclick="openTripModal('rome')">
+                <i class="fa-solid fa-circle-info"></i> Learn More
+              </button>
+            </div>
+          </div>
+
+          <div class="trip-card">
+            <img src="venice.jpg" alt="Venice Trip" class="trip-image">
+            <div class="trip-info">
+              <h2>Venice Lagoons Discovery</h2>
+              <div class="trip-meta">
+                <p><i class="fa-solid fa-location-dot"></i> Venice, Italy</p>
+                <p><i class="fa-solid fa-calendar-days"></i> May 2–4, 2025</p>
+                <p><i class="fa-solid fa-user-tie"></i> Prof. Verdi</p>
+                <p><i class="fa-solid fa-euro-sign"></i> €180</p>
+              </div>
+              <button class="btn learn-more-btn" onclick="openTripModal('venice')">
+                <i class="fa-solid fa-circle-info"></i> Learn More
+              </button>
+            </div>
+          </div>
+
+          <div class="trip-card">
+            <img src="florence.jpg" alt="Florence Trip" class="trip-image">
+            <div class="trip-info">
+              <h2>Florence Art Tour</h2>
+              <div class="trip-meta">
+                <p><i class="fa-solid fa-location-dot"></i> Florence, Italy</p>
+                <p><i class="fa-solid fa-calendar-days"></i> March 14–15, 2025</p>
+                <p><i class="fa-solid fa-user-tie"></i> Ms. Neri</p>
+                <p><i class="fa-solid fa-euro-sign"></i> €120</p>
+              </div>
+              <button class="btn learn-more-btn" onclick="openTripModal('florence')">
+                <i class="fa-solid fa-circle-info"></i> Learn More
+              </button>
+            </div>
+          </div>
+
+          <div class="trip-card">
+            <img src="cinque-terre.jpg" alt="Cinque Terre Trip" class="trip-image">
+            <div class="trip-info">
+              <h2>Cinque Terre Hike</h2>
+              <div class="trip-meta">
+                <p><i class="fa-solid fa-location-dot"></i> Liguria, Italy</p>
+                <p><i class="fa-solid fa-calendar-days"></i> June 5–6, 2025</p>
+                <p><i class="fa-solid fa-user-tie"></i> Mr. Bianchi</p>
+                <p><i class="fa-solid fa-euro-sign"></i> €100</p>
+              </div>
+              <button class="btn learn-more-btn" onclick="openTripModal('cinque')">
+                <i class="fa-solid fa-circle-info"></i> Learn More
+              </button>
+            </div>
+          </div>
+
+          <div class="trip-card">
+            <img src="dolomites.jpg" alt="Dolomites Trip" class="trip-image">
+            <div class="trip-info">
+              <h2>Dolomites Nature Hike</h2>
+
+                <div class="trip-meta">
+                  <p><i class="fa-solid fa-location-dot"></i> Trentino-Alto Adige</p>
+                  <p><i class="fa-solid fa-calendar-days"></i> June 15–18, 2025</p>
+                  <p><i class="fa-solid fa-user-tie"></i> Mr. Colombo</p>
+                  <p><i class="fa-solid fa-euro-sign"></i> €200</p>
+                </div>
+                <button class="btn learn-more-btn" onclick="openTripModal('dolomites')">
+                  <i class="fa-solid fa-circle-info"></i> Learn More
+                </button>
+              </div>
+          </div>
+          
+          <div class="trip-card">
+            <img src="amalfi.jpg" alt="Amalfi Coast Trip" class="trip-image">
+            <div class="trip-info">
+              <h2>Amalfi Coast Retreat</h2>
+                <div class="trip-meta">
+                  <p><i class="fa-solid fa-location-dot"></i> Amalfi Coast, Italy</p>
+                  <p><i class="fa-solid fa-calendar-days"></i> May 25–27, 2025</p>
+                  <p><i class="fa-solid fa-user-tie"></i> Ms. Giordano</p>
+                  <p><i class="fa-solid fa-euro-sign"></i> €180</p>
+                </div>
+                <button class="btn learn-more-btn" onclick="openTripModal('amalfi')">
+                  <i class="fa-solid fa-circle-info"></i> Learn More
+                </button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="tripModal" class="modal hidden">
+      <div class="modal-content">
+        <img id="modalImage" src="" alt="Trip Image" class="modal-image" />
+        <span class="close-button" onclick="closeTripModal()">&times;</span>
+        <h2 id="modalTitle">Trip Title</h2>
+        <p id="modalDescription">Full trip description goes here...</p>
+        <div id="modalDetails" class="modal-details">
+          <p>
+            <i class="fa-solid fa-location-dot"></i>
+            <span id="modalLocation"></span>
+          </p>
+          <p>
+            <i class="fa-solid fa-calendar-days"></i>
+            <span id="modalDates"></span>
+          </p>
+          <p>
+            <i class="fa-solid fa-user-tie"></i> <span id="modalTeacher"></span>
+          </p>
+          <p>
+            <i class="fa-solid fa-euro-sign"></i> <span id="modalPrice"></span>
+          </p>
+        </div>
+        <button class="btn modal-sign-up">
+          <i class="fa-solid fa-check"></i> Sign Up
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  function openTripModal(tripId) {
+    // Example static data (you could eventually load this dynamically)
+    const tripData = {
+      rome: {
+        title: "Rome Cultural Tour",
+        image: "rome.jpg",
+        description:
+          "Explore the Colosseum, Vatican City, Trevi Fountain, and more in this 3-day guided cultural experience.",
+        location: "Rome, Italy",
+        dates: "March 20–23, 2025",
+        teacher: "Mr. Rossi",
+        price: "€150",
+      },
+      cinque: {
+        title: "Cinque Terre Hike",
+        image: "cinque-terre.jpg",
+        description:
+          "A scenic hiking adventure across the five colorful villages of Cinque Terre, with breathtaking seaside views.",
+        location: "Liguria, Italy",
+        dates: "June 5–6, 2025",
+        teacher: "Mr. Bianchi",
+        price: "€100",
+      },
+      florence: {
+        title: "Florence Art Tour",
+        image: "florence.jpg",
+        description:
+          "Dive into the Renaissance with guided visits to the Uffizi Gallery, the Duomo, and Michelangelo's David.",
+        location: "Florence, Italy",
+        dates: "March 14–15, 2025",
+        teacher: "Ms. Neri",
+        price: "€120",
+      },
+      venice: {
+        title: "Venice Lagoon Discovery",
+        image: "venice.jpg",
+        description:
+          "Discover the canals of Venice and take a boat tour of the lagoon’s historic islands, including Murano and Burano.",
+        location: "Venice, Italy",
+        dates: "May 2–4, 2025",
+        teacher: "Prof. Verdi",
+        price: "€180",
+      },
+      dolomites: {
+        title: "Dolomites Nature Hike",
+        image: "dolomites.jpg",
+        description: "Embark on a guided hike through the stunning Dolomites mountain range, with overnight stays in mountain huts and nature immersion activities.",
+        location: "Trentino-Alto Adige",
+        dates: "June 15–18, 2025",
+        teacher: "Mr. Colombo",
+        price: "€200"
+      },
+      amalfi: {
+        title: "Amalfi Coast Retreat",
+        image: "amalfi.jpg",
+        description: "Enjoy the coastal beauty of Amalfi with beach walks, village tours, and a day trip to Capri. A perfect relaxing end-of-year getaway.",
+        location: "Amalfi Coast, Italy",
+        dates: "May 25–27, 2025",
+        teacher: "Ms. Giordano",
+        price: "€180"
+      }
+    };
+
+    const trip = tripData[tripId];
+
+    // Populate modal
+    document.getElementById("modalTitle").innerText = trip.title;
+    document.getElementById("modalImage").src = trip.image;
+    document.getElementById("modalDescription").innerText = trip.description;
+    document.getElementById("modalLocation").innerText = trip.location;
+    document.getElementById("modalDates").innerText = trip.dates;
+    document.getElementById("modalTeacher").innerText = trip.teacher;
+    document.getElementById("modalPrice").innerText = trip.price;
+
+    document.getElementById("tripModal").classList.remove("hidden");
+  }
+
+  function closeTripModal() {
+    document.getElementById("tripModal").classList.add("hidden");
+  }
+</script>
