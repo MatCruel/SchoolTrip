@@ -1,12 +1,16 @@
 package com.example.schooltrip.CONTROLLER;
 
 import com.example.schooltrip.MODEL.Person;
+import com.example.schooltrip.MODEL.Role;
 import com.example.schooltrip.MODEL.Trip;
 import com.example.schooltrip.REPOSITORY.PersonRepository;
 import com.example.schooltrip.REPOSITORY.TripRepository;
 import com.example.schooltrip.modelDTO.RelationDTO;
+import com.example.schooltrip.modelDTO.TripDTO;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,21 +35,29 @@ public class StudentController {
 	    Optional<Trip> tripOpt = tripRepository.findById(tripId);
 	    Optional<Person> personOpt = personRepository.findById(personId);
 
-	    if (tripOpt.isEmpty() || personOpt.isEmpty()) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Gita o studente non trovati");
+	    if (tripOpt.isEmpty()) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Trip not found");
+	    }
+	    
+	    if (personOpt.isEmpty()) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Person not found");
 	    }
 
 	    Trip trip = tripOpt.get();
 	    Person person = personOpt.get();
+	    
+	    if (person.getRole() != Role.STUDENT) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Only students can subscribe to a trip");
+	    }
 
 	    if (trip.getPartecipanti().contains(person)) {
-	        return ResponseEntity.status(HttpStatus.CONFLICT).body("Studente già iscritto alla gita");
+	        return ResponseEntity.status(HttpStatus.CONFLICT).body("Student already partecipateing");
 	    }
 
 	    trip.getPartecipanti().add(person);
 	    tripRepository.save(trip);
 
-	    return ResponseEntity.ok("Studente iscritto con successo alla gita");
+	    return ResponseEntity.ok("Student correctly subscribed to the trip");
 	}
 	
 	@PostMapping("/api/student/unsubscribe")
@@ -57,11 +69,11 @@ public class StudentController {
 	    Optional<Person> optionalPerson = personRepository.findById(personId);
 
 	    if (optionalTrip.isEmpty()) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Gita non trovata");
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Trip not found");
 	    }
 
 	    if (optionalPerson.isEmpty()) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Persona non trovata");
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found");
 	    }
 
 	    Trip trip = optionalTrip.get();
@@ -70,10 +82,53 @@ public class StudentController {
 	    if (trip.getPartecipanti().contains(person)) {
 	        trip.getPartecipanti().remove(person);
 	        tripRepository.save(trip);
-	        return ResponseEntity.ok("Iscrizione rimossa con successo");
+	        return ResponseEntity.ok("Student correctly unsubscribed");
 	    } else {
-	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La persona non è iscritta a questa gita");
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("This student was not subscribed to the trip in the first place");
 	    }
+	}
+	
+	/*@GetMapping("/api/trips/getall")
+    public ResponseEntity<List<TripDTO>> getAllTrips() {
+        List<TripDTO> trips = tripService.getAllTrips();
+        return ResponseEntity.ok(trips);
+    }*/
+	
+	@GetMapping("/api/student/show_all_trips")
+	public ResponseEntity<List<TripDTO>> show_all_trips(@RequestBody int  student_id) {
+		
+		Optional<Person> personOpt = personRepository.findById(student_id);
+
+	    if (personOpt.isEmpty()) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+	    }
+
+	    Person student = personOpt.get();
+
+	    if (student.getRole() != Role.STUDENT) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+	    }
+	    
+	    //cerca e filtra le gite
+	    List<Trip> allTrips = tripRepository.findAll();
+	    List<Trip> studentTrips = allTrips.stream()
+	        .filter(trip -> trip.getPartecipanti().contains(student))
+	        .collect(Collectors.toList());
+
+	    // Mappa da Trip a TripDTO
+	    List<TripDTO> tripDTOs = studentTrips.stream()
+	        .map(trip -> new TripDTO(
+	            trip.gettID(),
+	            trip.getName(),
+	            trip.getDescription(),
+	            trip.getLocation(),
+	            trip.getDate(),
+	            trip.getCost(),
+	            trip.getMax_partecipant()
+	        ))
+	        .collect(Collectors.toList());
+
+	    return ResponseEntity.ok(tripDTOs);
 	}
 
 }

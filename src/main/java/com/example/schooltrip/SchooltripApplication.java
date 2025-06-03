@@ -26,7 +26,7 @@ public class SchooltripApplication {
 		SpringApplication.run(SchooltripApplication.class, args);
 	}
 	
-	@Bean
+	/*@Bean
 	public CommandLineRunner demo(PersonRepository personRepo, TripRepository tripRepo) {
 		return (args) -> {
 			Person p = new Person(5, "vero", "Verdi", "mrossi5", "1234", Role.STUDENT);
@@ -52,6 +52,6 @@ public class SchooltripApplication {
 			System.out.println("Cerca persona con pID = 3 " + personRepo.findBypID(3));
 			System.out.println("Cerca trip con nome = name " + tripRepo.findByName("name"));
 		};
-	}
+	}*/
 
 }

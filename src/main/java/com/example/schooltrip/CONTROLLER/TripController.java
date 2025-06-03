@@ -1,6 +1,7 @@
 package com.example.schooltrip.CONTROLLER;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,7 +53,19 @@ public class TripController {
 	    // Salva la gita nel database
 	    tripRepository.save(newTrip);
 
-	    return ResponseEntity.ok("Gita aggiunta con successo!");
+	    return ResponseEntity.ok("Trip successfully added");
+    }
+    
+    @PostMapping("/api/trips/delete")
+	public ResponseEntity<String> addTrip(@RequestBody int tripID) {
+    	Optional<Trip> optionalTrip = tripRepository.findById(tripID);
+
+        if (optionalTrip.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Trip not found");
+        }
+
+        tripRepository.deleteById(tripID);
+        return ResponseEntity.ok("Trip successfully deleted");
     }
     	
 }
