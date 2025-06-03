@@ -9,6 +9,8 @@ public class Person {
 	private int pID;
 	private String name;
 	private String surname;
+	
+	@Column(unique = true)
 	private String username;
 	private String password;
 	private Role role; 

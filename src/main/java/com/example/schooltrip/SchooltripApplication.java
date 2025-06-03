@@ -29,8 +29,8 @@ public class SchooltripApplication {
 	@Bean
 	public CommandLineRunner demo(PersonRepository personRepo, TripRepository tripRepo) {
 		return (args) -> {
-			Person p = new Person(6, "vero", "Verdi", "mrossi6", "1234", Role.ADMIN);
-			Person x = new Person(7, "vero", "Verdi", "mrossi7", "1234", Role.STUDENT);
+			Person p = new Person(5, "vero", "Verdi", "mrossi5", "1234", Role.STUDENT);
+			Person x = new Person(6, "vero", "Verdi", "mrossi6", "1234", Role.STUDENT);
 			personRepo.save(p);
 			personRepo.save(x);
 			
