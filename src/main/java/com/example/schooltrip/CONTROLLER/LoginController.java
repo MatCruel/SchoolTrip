@@ -31,10 +31,10 @@ public class LoginController {
            if (user.getPassword().equals(password)) { // ⚠️ Solo esempio! Meglio usare password criptate.
                return ResponseEntity.ok("Login OK!");
            } else {
-               return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Password sbagliata");
+               return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Wrong password");
            }
        } else {
-           return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Utente non trovato");
+           return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
        }
    }
    }

@@ -44,6 +44,11 @@ public class TeacherController {
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Person not found");
 	    }
 	    
+	    /*
+	     * I chose that the limit (max_partecipant) is related only to students.
+	     * so an unlimited number of teacher can participate
+	     * */
+	    
 	    Trip trip = tripOpt.get();
 	    Person person = personOpt.get();
 

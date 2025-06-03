@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.schooltrip.MODEL.Feedback;
 import com.example.schooltrip.MODEL.Trip;
+import com.example.schooltrip.REPOSITORY.FeedbackRepository;
 import com.example.schooltrip.REPOSITORY.TripRepository;
 import com.example.schooltrip.SERVICE.TripService;
+import com.example.schooltrip.modelDTO.FeedbackDTO;
 import com.example.schooltrip.modelDTO.TripDTO;
 
 @RestController
@@ -25,6 +28,9 @@ public class TripController {
     
     @Autowired
     private TripRepository tripRepository;
+    
+    @Autowired
+    private FeedbackRepository feedbackRepository;
 
     @GetMapping("/api/trips/getall")
     public ResponseEntity<List<TripDTO>> getAllTrips() {
@@ -34,15 +40,9 @@ public class TripController {
     
     @PostMapping("/api/trips/add")
 	public ResponseEntity<String> addTrip(@RequestBody TripDTO tripDTO) {
-    	
-        if (tripRepository.existsById(tripDTO.gettID())) {
-            // Se esiste, ritorna un messaggio di errore
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("La gita con tID " + tripDTO.gettID() + " esiste già.");
-        }
 	    
     	// Converte il TripDTO in un oggetto Trip (l'entità salvabile)
     	Trip newTrip = new Trip();
-		    newTrip.settID(tripDTO.gettID());
 		    newTrip.setName(tripDTO.getName());
 		    newTrip.setDescription(tripDTO.getDescription());
 		    newTrip.setLocation(tripDTO.getLocation());
@@ -66,6 +66,22 @@ public class TripController {
 
         tripRepository.deleteById(tripID);
         return ResponseEntity.ok("Trip successfully deleted");
+    }
+    
+    @GetMapping("/api/trips/getfeedbacks")
+	public ResponseEntity<List<FeedbackDTO>> getFeedbacks(@RequestBody int tID) {
+    	 List<Feedback> feedbackList = feedbackRepository.findByTrip_tID(tID);
+
+    	    List<FeedbackDTO> dtos = feedbackList.stream()
+    	        .map(f -> new FeedbackDTO(
+    	            f.getTrip().gettID(),
+    	            f.getStudent().getpID(),
+    	            f.getN_stars(),
+    	            f.getComment()
+    	        ))
+    	        .toList();
+
+    	return ResponseEntity.ok(dtos);
     }
     	
 }

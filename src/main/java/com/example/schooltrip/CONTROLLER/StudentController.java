@@ -1,10 +1,13 @@
 package com.example.schooltrip.CONTROLLER;
 
+import com.example.schooltrip.MODEL.Feedback;
 import com.example.schooltrip.MODEL.Person;
 import com.example.schooltrip.MODEL.Role;
 import com.example.schooltrip.MODEL.Trip;
+import com.example.schooltrip.REPOSITORY.FeedbackRepository;
 import com.example.schooltrip.REPOSITORY.PersonRepository;
 import com.example.schooltrip.REPOSITORY.TripRepository;
+import com.example.schooltrip.modelDTO.FeedbackDTO;
 import com.example.schooltrip.modelDTO.RelationDTO;
 import com.example.schooltrip.modelDTO.TripDTO;
 
@@ -26,6 +29,9 @@ public class StudentController {
 	
 	@Autowired
 	   private PersonRepository personRepository;
+	
+	@Autowired
+	   private FeedbackRepository feedbackRepository;
 	
 	@PostMapping("/api/student/subscribe")
 	public ResponseEntity<String> subscribeToTrip(@RequestBody RelationDTO relationDTO) {
@@ -52,6 +58,10 @@ public class StudentController {
 
 	    if (trip.getPartecipanti().contains(person)) {
 	        return ResponseEntity.status(HttpStatus.CONFLICT).body("Student already partecipateing");
+	    }
+	    
+	    if (trip.getPartecipanti().size() >= trip.getMax_partecipant()) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Maximum number of participants reached");
 	    }
 
 	    trip.getPartecipanti().add(person);
@@ -88,12 +98,6 @@ public class StudentController {
 	    }
 	}
 	
-	/*@GetMapping("/api/trips/getall")
-    public ResponseEntity<List<TripDTO>> getAllTrips() {
-        List<TripDTO> trips = tripService.getAllTrips();
-        return ResponseEntity.ok(trips);
-    }*/
-	
 	@GetMapping("/api/student/show_all_trips")
 	public ResponseEntity<List<TripDTO>> show_all_trips(@RequestBody int  student_id) {
 		
@@ -129,6 +133,48 @@ public class StudentController {
 	        .collect(Collectors.toList());
 
 	    return ResponseEntity.ok(tripDTOs);
+	}
+	
+	@PostMapping("/api/student/leavefeedback")
+	public ResponseEntity<String> leave_a_feedback(@RequestBody FeedbackDTO feedbackDTO) {
+		Optional<Trip> optionalTrip = tripRepository.findById(feedbackDTO.gettId());
+	    Optional<Person> optionalStudent = personRepository.findById(feedbackDTO.getStudentId());
+
+	    if (optionalTrip.isEmpty() || optionalStudent.isEmpty()) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Trip or student not found");
+	    }
+	    
+	    Trip trip = optionalTrip.get();
+
+	    Person student = optionalStudent.get();
+	    if (student.getRole() != Role.STUDENT) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Only students can leave feedback");
+	    }
+	    
+	    if (feedbackRepository.existsByStudentAndTrip(student, trip)) {
+	        return ResponseEntity.status(HttpStatus.CONFLICT).body("Feedback already submitted for this trip by the student");
+	    }
+
+	    Feedback feedback = new Feedback();
+	    feedback.setTrip(optionalTrip.get());
+	    feedback.setStudent(student);
+	    feedback.setN_stars(feedbackDTO.getN_stars());
+	    feedback.setComment(feedbackDTO.getComment());
+
+	    feedbackRepository.save(feedback);
+
+	    return ResponseEntity.ok("Feedback successfully saved");
+	}
+	
+	@DeleteMapping("/api/student/deletefeedback")//da migliorare
+	public ResponseEntity<String> deleteFeedback(@RequestBody int fID) {
+	    Optional<Feedback> feedbackOpt = feedbackRepository.findById(fID);
+	    if (feedbackOpt.isPresent()) {
+	        feedbackRepository.deleteById(fID);
+	        return ResponseEntity.ok("Feedback deleted successfully");
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Feedback not found");
+	    }
 	}
 
 }

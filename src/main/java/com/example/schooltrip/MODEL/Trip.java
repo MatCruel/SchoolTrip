@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 @Entity
 public class Trip {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int tID;
 	private String name;
 	private String description;
@@ -31,13 +32,15 @@ public class Trip {
         inverseJoinColumns = @JoinColumn(name = "person_id")
     )
     private List<Person> partecipanti;
+    
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
+    private List<Feedback> feedbacks;
 	
 	
 	public Trip() {}
 
-
 	public Trip(int tID, String name, String description, String location, String date, int cost, int max_partecipant,
-			List<Person> insegnanti, List<Person> partecipanti) {
+			List<Person> insegnanti, List<Person> partecipanti, List<Feedback> feedbacks) {
 		super();
 		this.tID = tID;
 		this.name = name;
@@ -48,7 +51,11 @@ public class Trip {
 		this.max_partecipant = max_partecipant;
 		this.insegnanti = insegnanti;
 		this.partecipanti = partecipanti;
+		this.feedbacks = feedbacks;
 	}
+
+
+
 
 	public int gettID() {
 		return tID;
@@ -122,6 +129,13 @@ public class Trip {
 		this.max_partecipant = max_partecipant;
 	}
 
+	public List<Feedback> getFeedbacks() {
+		return feedbacks;
+	}
+
+	public void setFeedbacks(List<Feedback> feedbacks) {
+		this.feedbacks = feedbacks;
+	}
 
 	@Override
 	//@Transactional //valutare se serve

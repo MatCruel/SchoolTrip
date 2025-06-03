@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "person")
 public class Person {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int pID;
 	private String name;
 	private String surname;
@@ -13,6 +14,7 @@ public class Person {
 	@Column(unique = true)
 	private String username;
 	private String password;
+	@Enumerated(EnumType.STRING)
 	private Role role; 
 	
 	public Person() {}

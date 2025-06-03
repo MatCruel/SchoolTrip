@@ -1,5 +1,5 @@
 package com.example.schooltrip;
-import java.util.ArrayList;
+/*import java.util.ArrayList;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +9,7 @@ import com.example.schooltrip.MODEL.Person;
 import com.example.schooltrip.MODEL.Role;
 import com.example.schooltrip.MODEL.Trip;
 import com.example.schooltrip.REPOSITORY.PersonRepository;
-import com.example.schooltrip.REPOSITORY.TripRepository;
+import com.example.schooltrip.REPOSITORY.TripRepository;*/
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
