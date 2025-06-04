@@ -15,26 +15,32 @@ import org.springframework.web.bind.annotation.*;
 //@CrossOrigin(origins = "*")
 public class LoginController {
 
-   @Autowired
-   private PersonRepository personRepository; // o un UserRepository
+    @Autowired
+    private PersonRepository personRepository;
 
-   @PostMapping("/api/login/login")
-   public ResponseEntity<String> login(@RequestBody LoginDataDTO loginRequest) {
-       String username = loginRequest.getUsername();
-       String password = loginRequest.getPsw();
+    /**
+     * This method now handles form‐encoded POSTs to /login,
+     * reading “username” and “password” from the request parameters.
+     */
+    @PostMapping("/login")
+    public ResponseEntity<String> login(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password
+    ) {
+        // Cerca l'utente per username
+        Optional<Person> optionalUser = personRepository.findByUsername(username);
 
-       // Cerca l'utente per username
-       Optional<Person> optionalUser = personRepository.findByUsername(username);
+        if (optionalUser.isPresent()) {
+            Person user = optionalUser.get();
+            // (In production, NEVER store plain‐text passwords.)
+            if (user.getPassword().equals(password)) {
+                return ResponseEntity.ok("Login OK!");
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Wrong password");
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
+        }
+    }
 
-       if (optionalUser.isPresent()) {
-           Person user = optionalUser.get();
-           if (user.getPassword().equals(password)) { // ⚠️ Solo esempio! Meglio usare password criptate.
-               return ResponseEntity.ok("Login OK!");
-           } else {
-               return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Wrong password");
-           }
-       } else {
-           return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
-       }
-   }
-   }
+} 
