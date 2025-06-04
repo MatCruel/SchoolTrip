@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,8 +56,8 @@ public class TripController {
 	    return ResponseEntity.ok("Trip successfully added");
     }
     
-    @PostMapping("/api/trips/delete")
-	public ResponseEntity<String> addTrip(@RequestBody int tripID) {
+    @DeleteMapping("/api/trips/delete")
+	public ResponseEntity<String> deleteTrip(@RequestBody int tripID) {
     	Optional<Trip> optionalTrip = tripRepository.findById(tripID);
 
         if (optionalTrip.isEmpty()) {
@@ -70,18 +70,24 @@ public class TripController {
     
     @GetMapping("/api/trips/getfeedbacks")
 	public ResponseEntity<List<FeedbackDTO>> getFeedbacks(@RequestBody int tID) {
-    	 List<Feedback> feedbackList = feedbackRepository.findByTrip_tID(tID);
+    	Optional<Trip> optionalTrip = tripRepository.findById(tID);
+        
+        if (optionalTrip.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
 
-    	    List<FeedbackDTO> dtos = feedbackList.stream()
-    	        .map(f -> new FeedbackDTO(
-    	            f.getTrip().gettID(),
-    	            f.getStudent().getpID(),
-    	            f.getN_stars(),
-    	            f.getComment()
-    	        ))
-    	        .toList();
+        List<Feedback> feedbackList = feedbackRepository.findByTrip_tID(tID);
 
-    	return ResponseEntity.ok(dtos);
+        List<FeedbackDTO> dtos = feedbackList.stream()
+            .map(f -> new FeedbackDTO(
+                f.getTrip().gettID(),
+                f.getStudent().getpID(),
+                f.getN_stars(),
+                f.getComment()
+            ))
+            .toList();
+
+        return ResponseEntity.ok(dtos);
     }
     	
 }
